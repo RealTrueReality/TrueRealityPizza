@@ -3,17 +3,17 @@
 ## 目录
 
 1. [开发环境介绍](#1-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%8B%E7%BB%8D)
-   - 1.1 [必备工具](#11-%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7)
-   - 1.2 [项目结构](#12-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84)
+  - 1.1 [必备工具](#11-%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7)
+  - 1.2 [项目结构](#12-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84)
 2. [运行环境搭建说明](#2-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%AF%B4%E6%98%8E)
-   - 2.1 [通过安装包直接运行](#21-%E9%80%9A%E8%BF%87%E5%AE%89%E8%A3%85%E5%8C%85%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8C)
-   - 2.2 [Azure 部署地址](#22-azure-%E9%83%A8%E7%BD%B2%E5%9C%B0%E5%9D%80)
-   - 2.3 [克隆项目并安装依赖](#23-%E5%85%8B%E9%9A%86%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96)
-   - 2.4 [数据库配置](#24-%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
-   - 2.5 [配置启动应用](#25-%E9%85%8D%E7%BD%AE%E5%90%AF%E5%8A%A8%E5%BA%94%E7%94%A8)
-   - 2.6 [运行客户端项目](#26-%E8%BF%90%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%A1%B9%E7%9B%AE)
-   - 2.7 [用户认证与权限管理](#27-%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86)
-   - 2.8 [前端组件开发](#28-%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91)
+  - 2.1 [通过安装包直接运行](#21-%E9%80%9A%E8%BF%87%E5%AE%89%E8%A3%85%E5%8C%85%E7%9B%B4%E6%8E%A5%E8%BF%90%E8%A1%8C)
+  - 2.2 [Azure 部署地址](#22-azure-%E9%83%A8%E7%BD%B2%E5%9C%B0%E5%9D%80)
+  - 2.3 [克隆项目并安装依赖](#23-%E5%85%8B%E9%9A%86%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96)
+  - 2.4 [数据库配置](#24-%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE)
+  - 2.5 [配置启动应用](#25-%E9%85%8D%E7%BD%AE%E5%90%AF%E5%8A%A8%E5%BA%94%E7%94%A8)
+  - 2.6 [运行客户端项目](#26-%E8%BF%90%E8%A1%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%A1%B9%E7%9B%AE)
+  - 2.7 [用户认证与权限管理](#27-%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86)
+  - 2.8 [前端组件开发](#28-%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6%E5%BC%80%E5%8F%91)
 3. [运行说明](#3-%E8%BF%90%E8%A1%8C%E8%AF%B4%E6%98%8E)
 4. [注意事项](#4-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9)
 5. [常见问题](#5-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
@@ -35,24 +35,34 @@
 
 ### 1.2 项目结构
 
+**本项目已上传至Github开源**
+
+**项目仓库**: https://github.com/RealTrueReality/TrueRealityPizza
+
 项目包含以下子项目，每个项目有不同的职责：
 
-- **TrueRealityPizza**:
+- **TrueRealityPizza**（服务端项目，基于 Blazor Server）：
   
-  - 负责应用程序的服务端逻辑，包括数据库上下文、控制器和 API。
-  - 提供 Razor Components 支持，处理服务器端交互及身份认证逻辑。
-
-- **TrueRealityPizza.Client**:
+  - **职责**:
+    - **服务端逻辑处理**: 负责核心的业务逻辑，包括与数据库交互、API 的创建、以及身份认证的处理。
+    - **Razor Components 支持**: 提供 Razor 组件，这些组件主要用于页面的服务端渲染。Blazor Server 允许在服务端执行逻辑并实时更新客户端界面，保证用户体验的一致性和实时性。
+    - **身份认证与授权**: 通过 ASP.NET Identity 实现用户注册、登录及权限管理，确保不同用户（如管理员、普通用户）拥有正确的权限。
+- **TrueRealityPizza.Client**（前端项目，基于 Blazor WebAssembly）：
   
-  - 使用 Blazor WebAssembly 构建的前端应用，负责用户界面展示和与服务端 API 的交互。
-
-- **TrueRealityPizza.ComponentsLibrary**:
+  - **职责**:
+    - **用户界面展示**: 通过 Blazor WebAssembly 构建的前端应用，在客户端执行。Blazor WebAssembly 的特点是将 C# 代码编译为 WebAssembly 在浏览器中运行，提供高度响应式的前端体验。
+    - **与服务端 API 的交互**: 通过 `HttpClient` 与服务端（TrueRealityPizza Blazor Server）进行交互，客户端可以请求 API 获取订单信息、用户信息等数据，并在界面中展示。
+    - **页面展示与交互**: 包括订单管理、用户操作等，所有的界面逻辑都在浏览器端执行，大大减轻了服务器压力。
+- **TrueRealityPizza.ComponentsLibrary**（组件库）：
   
-  - 提供可复用的 Blazor 组件库，封装前端页面中的交互逻辑。
-
-- **TrueRealityPizza.Shared**:
+  - **职责**:
+    - **Blazor 组件复用**: 该项目提供可复用的 Blazor 组件，封装了前端页面中的常用交互逻辑，例如对话框、表单和数据列表等。
+    - **跨项目使用**: 这些组件不仅用于 Blazor WebAssembly 前端（TrueRealityPizza.Client），也可以在 Blazor Server 项目中使用（TrueRealityPizza），保证组件逻辑的复用和一致性。
+- **TrueRealityPizza.Shared**（共享模型和接口）：
   
-  - 包含共享的模型和接口，例如 Pizza、订单等实体模型，以及仓储接口。
+  - **职责**:
+    - **模型与接口共享**: 该项目包含了项目中的实体模型（如 Pizza、订单等）和相关的接口定义。此部分用于在 TrueRealityPizza 和 TrueRealityPizza.Client 两个项目之间共享数据模型，确保前后端使用相同的业务逻辑和数据结构。
+    - **数据一致性与复用性**: 由于前端和后端都使用相同的模型，这确保了前后端数据结构的一致性，避免了不必要的数据转换和重复定义。
 
 ```plaintext
 TrueRealityPizza/
@@ -69,13 +79,14 @@ TrueRealityPizza/
 为了方便用户快速运行项目，已经将程序及其运行时环境打包在 **TrueRealityPizzaInstaller.exe** 文件中。可以直接通过该安装包进行项目安装并运行：
 
 1. **下载并运行安装包**：
-   双击 **TrueRealityPizzaInstaller.exe** 文件并双击运行。
-
+  双击 **TrueRealityPizzaInstaller.exe** 文件并双击运行。
+  
 2. **安装过程**：
-   按照安装向导的提示，选择安装路径并进行安装。
-
+  按照安装向导的提示，选择安装路径并进行安装。
+  
 3. **启动应用**：
-   安装完成后，安装程序会自动启动 TrueRealityPizza 应用，你可以通过桌面快捷方式或者程序目录中的可执行文件启动应用。
+  安装完成后，安装程序会自动启动 TrueRealityPizza 应用，你可以通过桌面快捷方式或者程序目录中的可执行文件启动应用。
+  
 
 安装完成后，应用将自动运行并打开浏览器指向 `https://localhost:5001`。你可以立即开始使用项目。
 

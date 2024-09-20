@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+@layout TrueRealityPizza.Components.Layout.MainLayout
+@inject NavigationManager NavigationManager
+
+@if (HttpContext is null) {
+    <p>加载中...</p>
+}
+else {
+    <div class="main">
+        <div class="login-page" style="margin-left: 9rem; color: white">
+            @Body
+
+        </div>
+    </div>
+}
+
+@code {
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+
+    protected override void OnParametersSet() {
+        if (HttpContext is null) {
+            // 如果此代码运行，表示我们当前正在交互模式下渲染，因此没有 HttpContext。
+            // 身份验证页面需要设置 cookie，因此它们需要 HttpContext。为了实现这一点，
+            // 我们必须从交互模式切换回服务器渲染的页面。
+            NavigationManager.Refresh(forceReload: true);
+        }
+    }
+
+}

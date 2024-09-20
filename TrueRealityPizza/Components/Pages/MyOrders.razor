@@ -1,0 +1,59 @@
+﻿@page "/myorders"
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@inject IRepository Repository
+@attribute [Authorize]
+
+<PageTitle>TrueReality Pizza - 我的订单</PageTitle>
+
+<div class="main">
+    <TemplatedList Loader="LoadOrders" ListGroupClass="orders-list">
+        <Loading>加载中...</Loading>
+        
+        <Empty>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="alert alert-info" style="position: relative;">
+                        <h3>您还没有点过单</h3>
+                        <br/>
+                        <a class="btn btn-success" href="" style="position: absolute; bottom: 10px; right: 10px;">点单</a>
+                    </div>
+                </div>
+            </div>
+
+        </Empty>
+        <Item Context="item">
+            <div class="col">
+                <h5>@item.Order.CreatedTime.ToLongDateString()</h5>
+                项目数:
+                <strong>@item.Order.Pizzas.Count()</strong>;
+                总价:
+                <strong>¥@item.Order.GetFormattedTotalPrice()</strong>
+            </div>
+            <div class="col">
+                状态: <strong>@item.StatusText</strong>
+            </div>
+            <div class="col flex-grow-0">
+                <a href="myorders/@item.Order.OrderId" class="btn btn-success">
+                    查看状态 &gt;
+                </a>
+            </div>
+        </Item>
+    </TemplatedList>
+</div>
+@code {
+    IEnumerable<OrderWithStatus>? ordersWithStatus;
+
+    [CascadingParameter]
+    public HttpContext HttpContext { get; set; } = default!;
+
+
+    async Task<IEnumerable<OrderWithStatus>> LoadOrders()
+    {
+        var ordersWithStatus = Enumerable.Empty<OrderWithStatus>();
+
+        ordersWithStatus = await Repository.GetOrdersAsync(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        return ordersWithStatus;
+    }
+}

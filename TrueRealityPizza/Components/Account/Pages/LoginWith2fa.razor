@@ -1,0 +1,109 @@
+﻿@page "/Account/LoginWith2fa"
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<PizzaStoreUser> SignInManager
+@inject UserManager<PizzaStoreUser> UserManager
+@inject IdentityRedirectManager RedirectManager
+@inject ILogger<LoginWith2fa> Logger
+
+<PageTitle>双重认证</PageTitle>
+
+<h1>双重认证</h1>
+<StatusMessage Message="@message" />
+<p>您的登录受到身份验证器应用的保护。请输入您的身份验证代码。</p>
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="Input" FormName="login-with-2fa" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <hr />
+            <input type="hidden" name="ReturnUrl" value="@ReturnUrl" />
+            <input type="hidden" name="RememberMe" value="@RememberMe" />
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert" />
+            <div class="form-floating mb-3">
+                <label for="two-factor-code" class="form-label">身份验证器代码</label>
+                <InputText @bind-Value="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+                <ValidationMessage For="() => Input.TwoFactorCode" class="text-danger" />
+            </div>
+            <div class="checkbox mb-3">
+                <label for="remember-machine" class="form-label">
+                    <InputCheckbox @bind-Value="Input.RememberMachine" />
+                    记住此设备
+                </label>
+            </div>
+            <div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">登录</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+<br />
+<p>
+    无法访问您的身份验证设备？您可以
+    <a href="Account/LoginWithRecoveryCode?ReturnUrl=@ReturnUrl">使用恢复代码登录</a>。
+</p>
+
+@code {
+    private string? message;
+    private PizzaStoreUser user = default!;
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = new();
+
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    [SupplyParameterFromQuery]
+    private bool RememberMe { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // 确保用户已经通过了用户名和密码验证页面
+        user = await SignInManager.GetTwoFactorAuthenticationUserAsync() ??
+            throw new InvalidOperationException("无法加载双重认证用户。");
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+        var authenticatorCode = Input.TwoFactorCode!.Replace(" ", string.Empty).Replace("-", string.Empty);
+        var result = await SignInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, RememberMe, Input.RememberMachine);
+        var userId = await UserManager.GetUserIdAsync(user);
+
+        if (result.Succeeded)
+        {
+            Logger.LogInformation("ID 为 '{UserId}' 的用户通过双重认证登录成功。", userId);
+
+            // 如果 ReturnUrl 为空或 null，设置默认跳转到首页
+            if (string.IsNullOrEmpty(ReturnUrl))
+            {
+                ReturnUrl = "/";
+            }
+
+            RedirectManager.RedirectTo(ReturnUrl); // 跳转到首页或指定页面
+        }
+        else if (result.IsLockedOut)
+        {
+            Logger.LogWarning("ID 为 '{UserId}' 的用户账户已被锁定。", userId);
+            RedirectManager.RedirectTo("Account/Lockout");
+        }
+        else
+        {
+            Logger.LogWarning("ID 为 '{UserId}' 的用户输入了无效的身份验证器代码。", userId);
+            message = "错误: 无效的身份验证器代码。";
+        }
+    }
+
+
+    private sealed class InputModel
+    {
+        [Required]
+        [StringLength(7, ErrorMessage = "{0} 必须至少包含 {2} 个字符，且最多包含 {1} 个字符。", MinimumLength = 6)]
+        [DataType(DataType.Text)]
+        [Display(Name = "身份验证器代码")]
+        public string? TwoFactorCode { get; set; }
+
+        [Display(Name = "记住此设备")]
+        public bool RememberMachine { get; set; }
+    }
+}

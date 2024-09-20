@@ -1,0 +1,56 @@
+﻿@page "/Account/Manage/ResetAuthenticator"
+
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<PizzaStoreUser> UserManager
+@inject SignInManager<PizzaStoreUser> SignInManager
+@inject IdentityUserAccessor UserAccessor
+@inject IdentityRedirectManager RedirectManager
+@inject ILogger<ResetAuthenticator> Logger
+
+<PageTitle>重置身份验证器密钥</PageTitle>
+
+    <StatusMessage />
+
+<h3>重置身份验证器密钥</h3>
+<div class="row">
+    <div class="col-md-6">
+    <div class="alert alert-warning" role="alert">
+        <p>
+            <span class="glyphicon glyphicon-warning-sign"></span>
+            <strong>如果您重置身份验证器密钥，您的身份验证器应用将无法使用，直到您重新配置它。</strong>
+        </p>
+        <p>
+            此过程将禁用 2FA，直到您验证身份验证器应用。
+            如果您未完成身份验证器应用的配置，可能会失去对账户的访问权限。
+        </p>
+    </div>
+    </div>
+</div>
+<div>
+    <form @formname="reset-authenticator" @onsubmit="OnSubmitAsync" method="post">
+        <AntiforgeryToken />
+        <button class="btn btn-danger" type="submit">重置身份验证器密钥</button>
+    </form>
+</div>
+
+@code {
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    private async Task OnSubmitAsync()
+    {
+        var user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        await UserManager.SetTwoFactorEnabledAsync(user, false);
+        await UserManager.ResetAuthenticatorKeyAsync(user);
+        var userId = await UserManager.GetUserIdAsync(user);
+        Logger.LogInformation("ID为 '{UserId}' 的用户已重置其身份验证器应用密钥。", userId);
+
+        await SignInManager.RefreshSignInAsync(user);
+
+        RedirectManager.RedirectToWithStatus(
+            "Account/Manage/EnableAuthenticator",
+            "您的身份验证器密钥已重置，您需要使用新密钥配置身份验证器应用。",
+            HttpContext);
+    }
+}

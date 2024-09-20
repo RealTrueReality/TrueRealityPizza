@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\TrueRealityPizza.Client.props" />
+</Project>

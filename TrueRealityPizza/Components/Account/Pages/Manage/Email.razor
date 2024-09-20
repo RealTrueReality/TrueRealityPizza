@@ -1,0 +1,129 @@
+﻿@page "/Account/Manage/Email"
+
+@using System.ComponentModel.DataAnnotations
+@using System.Text
+@using System.Text.Encodings.Web
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject UserManager<PizzaStoreUser> UserManager
+@inject IEmailSender<PizzaStoreUser> EmailSender
+@inject IdentityUserAccessor UserAccessor
+@inject NavigationManager NavigationManager
+
+<PageTitle>管理电子邮箱</PageTitle>
+
+<h3>管理电子邮箱</h3>
+
+
+
+
+<div class="row">
+    <div class="col-md-6">
+        <StatusMessage Message="@message"/>
+        @if (!string.IsNullOrEmpty(callbackUrl))
+        {
+        <div class="mt-4 mb-4">
+            <a class="btn btn-primary" href="@callbackUrl">点击这里来确认邮箱修改</a>
+        </div>
+        }
+        <form @onsubmit="OnSendEmailVerificationAsync" @formname="send-verification" id="send-verification-form" method="post">
+            <AntiforgeryToken/>
+        </form>
+        <EditForm Model="Input" FormName="change-email" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <DataAnnotationsValidator/>
+            <ValidationSummary class="text-danger" role="alert"/>
+            @if (isEmailConfirmed) {
+                <label for="email" class="form-label">电子邮箱</label>
+                <div class="form-floating mb-3 input-group">
+                    <input type="text" value="@email" class="form-control" placeholder="请输入您的邮箱。" disabled/>
+                    <div class="input-group-append">
+                        <span class="h-100 input-group-text text-success font-weight-bold">✓</span>
+                    </div>
+                </div>
+            }
+            else {
+                <div class="form-floating mb-3">
+                    <label for="email" class="form-label">电子邮箱</label>
+                    <input type="text" value="@email" class="form-control" placeholder="请输入您的邮箱。" disabled/>
+                    <button type="submit" class="btn btn-link" form="send-verification-form">发送验证邮件</button>
+                </div>
+            }
+            <div class="form-floating mb-3">
+                <label for="new-email" class="form-label">新邮箱</label>
+                <InputText @bind-Value="Input.NewEmail" class="form-control" autocomplete="email" aria-required="true" placeholder="请输入新邮箱。"/>
+                <ValidationMessage For="() => Input.NewEmail" class="text-danger"/>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">更改邮箱</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? message;
+    private PizzaStoreUser user = default!;
+    private string? email;
+    private bool isEmailConfirmed;
+    private string? callbackUrl;
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm(FormName = "change-email")]
+    private InputModel Input { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        email = await UserManager.GetEmailAsync(user);
+        isEmailConfirmed = await UserManager.IsEmailConfirmedAsync(user);
+
+        Input.NewEmail ??= email;
+    }
+
+    private async Task OnValidSubmitAsync()
+{
+    if (Input.NewEmail is null || Input.NewEmail == email)
+    {
+        message = "您的邮箱没有改变。";
+        return;
+    }
+
+    var userId = await UserManager.GetUserIdAsync(user);
+    var code = await UserManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
+    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+    callbackUrl = NavigationManager.GetUriWithQueryParameters(
+        NavigationManager.ToAbsoluteUri("Account/ConfirmEmailChange").AbsoluteUri,
+        new Dictionary<string, object?> { ["userId"] = userId, ["email"] = Input.NewEmail, ["code"] = code });
+
+    // 将确认链接显示在页面上而不是发送邮件
+    message = $"已发送更改邮箱的确认链接。请检查您的邮箱或点击下面按钮来确认邮箱更改：";
+}
+
+
+    private async Task OnSendEmailVerificationAsync()
+    {
+        if (email is null)
+        {
+            return;
+        }
+
+        var userId = await UserManager.GetUserIdAsync(user);
+        var code = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+        callbackUrl = NavigationManager.GetUriWithQueryParameters(
+            NavigationManager.ToAbsoluteUri("Account/ConfirmEmail").AbsoluteUri,
+            new Dictionary<string, object?> { ["userId"] = userId, ["code"] = code });
+
+        await EmailSender.SendConfirmationLinkAsync(user, email, HtmlEncoder.Default.Encode(callbackUrl));
+
+        message = "验证邮件已发送。请检查您的邮箱。";
+    }
+
+    private sealed class InputModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "新邮箱")]
+        public string? NewEmail { get; set; }
+    }
+}

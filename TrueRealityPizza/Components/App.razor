@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+	<base href="/" />
+	<link rel="icon" href="img/icon-512.png" />
+	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="TrueRealityPizza.styles.css" />
+	<link href="_content/TrueRealityPizza.ComponentsLibrary/leaflet/leaflet.css" rel="stylesheet" />
+	<link rel="manifest" href="manifest.json" />
+	<link href="css/original.css" rel="stylesheet" />
+	<HeadOutlet />
+</head>
+
+<body>
+	<Routes />
+	<script src="_framework/blazor.web.js"></script>
+	<script src="_content/TrueRealityPizza.ComponentsLibrary/localStorage.js"></script>
+	<script src="_content/TrueRealityPizza.ComponentsLibrary/pushNotifications.js"></script>
+	<script src="_content/TrueRealityPizza.ComponentsLibrary/deliveryMap.js"></script>
+	<script src="_content/TrueRealityPizza.ComponentsLibrary/leaflet/leaflet.js"></script>
+	<script>navigator.serviceWorker.register('service-worker.js');</script>
+	<script src="qrcode.min.js"></script>
+</body>
+
+</html>

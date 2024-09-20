@@ -1,0 +1,72 @@
+﻿@page "/Account/ConfirmEmailChange"
+
+@using System.Text
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject UserManager<PizzaStoreUser> UserManager
+@inject SignInManager<PizzaStoreUser> SignInManager
+@inject IdentityRedirectManager RedirectManager
+
+<PageTitle>确认更改邮箱</PageTitle>
+
+<h1>确认更改邮箱</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <hr>
+        <StatusMessage Message="@message" />
+    </div>
+</div>
+<a class="btn btn-primary" href="">返回首页</a>
+@code {
+    private string? message;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromQuery]
+    private string? UserId { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? Email { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? Code { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (UserId is null || Email is null || Code is null)
+        {
+            RedirectManager.RedirectToWithStatus(
+                "Account/Login", "错误：无效的邮箱更改确认链接。", HttpContext);
+        }
+
+        var user = await UserManager.FindByIdAsync(UserId);
+        if (user is null)
+        {
+            message = $"无法找到用户ID '{UserId}'";
+            return;
+        }
+
+        var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(Code));
+        var result = await UserManager.ChangeEmailAsync(user, Email, code);
+        if (!result.Succeeded)
+        {
+            message = "更改邮箱时出错。";
+            return;
+        }
+
+        // 在我们的UI中，邮箱和用户名是一样的，因此当我们更新邮箱时
+        // 需要同时更新用户名。
+        var setUserNameResult = await UserManager.SetUserNameAsync(user, Email);
+        if (!setUserNameResult.Succeeded)
+        {
+            message = "更改用户名时出错。";
+            return;
+        }
+
+        await SignInManager.RefreshSignInAsync(user);
+        message = "感谢您确认您的邮箱更改。";
+    }
+}

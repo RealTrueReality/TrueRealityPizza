@@ -1,0 +1,16 @@
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\bin\Release\net8.0\TrueRealityPizza.ComponentsLibrary.staticwebassets.runtime.json
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\bin\Release\net8.0\TrueRealityPizza.Shared.deps.json
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\bin\Release\net8.0\TrueRealityPizza.Shared.dll
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\bin\Release\net8.0\TrueRealityPizza.Shared.pdb
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\bin\Release\net8.0\TrueRealityPizza.ComponentsLibrary.dll
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\bin\Release\net8.0\TrueRealityPizza.ComponentsLibrary.pdb
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.csproj.AssemblyReference.cache
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.AssemblyInfoInputs.cache
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.AssemblyInfo.cs
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.csproj.CoreCompileInputs.cache
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueReal.A4FD6F36.Up2Date
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.dll
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\refint\TrueRealityPizza.Shared.dll
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\TrueRealityPizza.Shared.pdb
+E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Shared\obj\Release\net8.0\ref\TrueRealityPizza.Shared.dll

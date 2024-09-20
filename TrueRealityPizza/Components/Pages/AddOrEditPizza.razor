@@ -1,0 +1,150 @@
+﻿@page "/add-or-edit-pizza/{PizzaId:int?}"
+@inject IManagePizzaRepository ManagePizzaRepository
+@inject NavigationManager NavigationManager
+@inject IWebHostEnvironment WebHostEnvironment
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+<PageTitle>@(PizzaId.HasValue ? "编辑披萨" : "添加披萨")</PageTitle>
+
+<div class="main" style="display: flex; justify-content: space-between;color: white">
+    <!-- 左侧：披萨表单 -->
+    <div style="width: 60%;">
+        <h3>@(PizzaId.HasValue ? "编辑披萨" : "添加披萨")</h3>
+
+        <!-- Add the unique FormName here -->
+        <EditForm Model="PizzaSpecial" OnValidSubmit="HandleValidSubmit" FormName="PizzaForm">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+
+            <div class="form-group">
+                <label>披萨名称:</label>
+                <InputText id="Name" @bind-Value="PizzaSpecial.Name" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label>描述:</label>
+                <InputTextArea id="Description" @bind-Value="PizzaSpecial.Description" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label>价格:</label>
+                <InputNumber id="BasePrice" @bind-Value="PizzaSpecial.BasePrice" class="form-control" min="0" step="0.01"/>
+            </div>
+
+            <div class="form-group">
+                <label>图片链接:</label>
+                <InputText id="ImageUrl" @bind-Value="PizzaSpecial.ImageUrl" class="form-control" readonly/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">保存</button>
+            <button type="button" class="btn btn-secondary" @onclick="Cancel">取消</button>
+
+            @if (PizzaId.HasValue)
+            {
+                <!-- 只有编辑模式时显示删除按钮 -->
+                <button type="button" class="btn btn-danger" @onclick="ConfirmDelete" style="margin-left: 10px;">删除</button>
+            }
+        </EditForm>
+    </div>
+
+    <!-- 右侧：图片上传 -->
+    <div style="width: 35%; text-align: center;">
+        <h4>披萨图片</h4>
+        <img src="@_imagePreviewUrl" alt="@(PizzaSpecial?.Name ??"请上传披萨图片")" style="max-width: 100%; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;"/>
+        <br/>
+        <hr/>
+        <div style="align-self: flex-end;">
+            <!-- 使用Bootstrap样式的按钮 -->
+            <label class="btn btn-primary">
+                上传图片
+                <InputFile OnChange="HandleImageUpload" accept="image/*" style="display:none"/>
+            </label>
+        </div>
+    </div>
+
+</div>
+
+@code {
+    [Parameter] public int? PizzaId { get; set; }
+
+    [SupplyParameterFromForm(FormName = "PizzaForm")]
+    public PizzaSpecial? PizzaSpecial { get; set; } = new() {
+        ImageUrl = "img/blazinglogo.png"
+    };
+    private string? _imagePreviewUrl="img/addpizza.png"; // 初始图片或默认图片
+
+    protected override async Task OnParametersSetAsync() {
+        if (PizzaId.HasValue) {
+            // 编辑模式，加载已有的披萨数据
+            var existingPizza = await ManagePizzaRepository.GetPizzaSpecialByIdAsync(PizzaId.Value);
+            PizzaSpecial = existingPizza;
+            _imagePreviewUrl = $"/{PizzaSpecial.ImageUrl}"; // 从数据库读取相对路径
+        }
+    }
+
+    private async Task HandleValidSubmit() {
+        if (PizzaSpecial != null) {
+            Console.WriteLine($"Before submit: Name = {PizzaSpecial.Name}, Description = {PizzaSpecial.Description}, Price = {PizzaSpecial.BasePrice}");
+            if (PizzaId.HasValue) {
+                // 编辑模式，更新披萨
+                await ManagePizzaRepository.UpdatePizzaSpecialAsync(PizzaSpecial);
+            }
+            else {
+                // 添加新披萨
+                await ManagePizzaRepository.AddPizzaSpecialAsync(PizzaSpecial);
+            }
+        }
+
+        // 返回首页
+        NavigationManager.NavigateTo("/admin/pizza-management");
+    }
+
+    private void Cancel() {
+        // 返回首页
+        NavigationManager.NavigateTo("/admin/pizza-management");
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e) {
+        if (string.IsNullOrWhiteSpace(PizzaSpecial?.Name)) {
+            // 提示用户先输入披萨名称
+            await JSRuntime.InvokeVoidAsync("alert", "请先输入披萨名称再上传图片！");
+            return; // 阻止上传
+        }
+
+        var imageFile = e.File;
+        var fileName = $"{PizzaSpecial?.Name}.jpg"; // 使用披萨名称作为文件名
+        var filePath = Path.Combine(WebHostEnvironment.WebRootPath, "img/pizzas", fileName);
+
+        // 保存图片到服务器
+        await using var fileStream = new FileStream(filePath, FileMode.Create);
+        await imageFile.OpenReadStream().CopyToAsync(fileStream);
+
+        // 设置图片预览URL
+        _imagePreviewUrl = $"/img/pizzas/{fileName}";
+
+        // 将保存的图片路径存储到数据库
+        if (PizzaSpecial != null) PizzaSpecial.ImageUrl = $"img/pizzas/{fileName}";
+    }
+
+
+    // JavaScript 的 Confirm 确认删除
+    private async Task ConfirmDelete()
+    {
+        var message = $"你确定要删除披萨 '{PizzaSpecial?.Name}' 吗？"; // 构建确认消息字符串
+        if (await JSRuntime.Confirm(message))
+        {
+            await DeletePizza();
+        }
+    }
+
+
+    private async Task DeletePizza() {
+        if (PizzaId.HasValue) {
+            // 调用仓储删除方法
+            await ManagePizzaRepository.DeletePizzaSpecialAsync(PizzaId.Value);
+
+            // 删除后导航回管理页面
+            NavigationManager.NavigateTo("/admin/pizza-management");
+        }
+    }
+}

@@ -1,0 +1,113 @@
+﻿@inject IRepository _pizzaStore
+
+		<div class="dialog-title">
+			<h2>@Pizza.Special?.Name</h2>
+			@Pizza.Special?.Description
+		</div>
+		<form class="dialog-body">
+			<div>
+				<label class="@SizeLabelClass" title="@SizeTitle">尺寸:</label>
+				<input type="range" min="@Pizza.MinimumSize" max="@Pizza.MaximumSize" step="1" @bind="Pizza.Size" @bind:event="oninput" />
+				<span class="size-label">
+					@(Pizza.Size)" (￥@(Pizza.GetFormattedTotalPrice()))
+				</span>
+			</div>
+			<div>
+				<label>额外配料:</label>
+				@if (toppings is null)
+				{
+					<select class="custom-select" disabled>
+						<option>(加载中...)</option>
+					</select>
+				}
+				else if (Pizza.Toppings.Count >= 6)
+				{
+					<div>(已达到最大数量)</div>
+				}
+				else
+				{
+					<select class="custom-select" @onchange="ToppingSelected">
+						<option value="-1" disabled selected>(请选择)</option>
+						@for (var i = 0; i < toppings.Count; i++)
+						{
+							<option value="@i">@toppings[i].Name - (￥@(toppings[i].GetFormattedPrice()))</option>
+						}
+					</select>
+				}
+			</div>
+
+			<div class="toppings">
+				@foreach (var topping in Pizza.Toppings)
+				{
+					if (topping?.Topping is not null)
+					{
+						<div class="topping">
+							@topping.Topping.Name
+							<span class="topping-price">@topping.Topping.GetFormattedPrice()</span>
+							<button type="button" class="delete-topping" @onclick="@(() => RemoveTopping(topping.Topping))">x</button>
+						</div>
+					}
+				}
+			</div>
+		</form>
+		<div class="dialog-buttons">
+			<button class="btn btn-secondary mr-auto" @onclick="OnCancel">取消</button>
+			<span class="mr-center">
+				价格: <span class="price">@(Pizza.GetFormattedTotalPrice())</span>
+			</span>
+			<button class="btn btn-success ml-auto" @onclick="OnConfirm">下单 ></button>
+		</div>
+
+
+@code {
+	[Parameter, EditorRequired] public Pizza Pizza { get; set; } = new();
+
+	[Parameter, EditorRequired] public EventCallback OnCancel { get; set; }
+	[Parameter, EditorRequired] public EventCallback OnConfirm { get; set; }
+
+	List<Topping> toppings = null!;
+
+	private const int SmallPizzaSize = 9;
+	private const int LargePizzaSize = 14;
+
+	string SizeLabelClass => Pizza.Size switch
+	{
+		<= SmallPizzaSize => "pizza-small",
+		>= LargePizzaSize => "pizza-large",
+		_ => "pizza-medium"
+	};
+
+	string SizeTitle => Pizza.Size switch
+	{
+		<= SmallPizzaSize => "这是一个小披萨，... 要不要再多点一些？",
+		>= LargePizzaSize => "这才是我想要的！ 试试超大号的披萨怎么样？",
+		_ => "这是一个中号披萨，如果需要更多，可以继续点单"
+	};
+
+	protected async override Task OnInitializedAsync()
+	{
+		toppings = await _pizzaStore.GetToppings();
+	}
+
+	void ToppingSelected(ChangeEventArgs e)
+	{
+		if (int.TryParse((string?)e.Value, out var index) && index >= 0)
+		{
+			AddTopping(toppings[index]);
+		}
+	}
+
+	void AddTopping(Topping topping)
+	{
+		if (toppings is null) return;
+		if (Pizza.Toppings.Find(pt => pt.Topping == topping) is null)
+		{
+			Pizza.Toppings.Add(new PizzaTopping() { Topping = topping });
+		}
+	}
+
+	void RemoveTopping(Topping topping)
+	{
+		Pizza.Toppings.RemoveAll(pt => pt.Topping == topping);
+	}
+}

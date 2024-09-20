@@ -1,0 +1,84 @@
+﻿@page "/Account/LoginWithRecoveryCode"
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<PizzaStoreUser> SignInManager
+@inject UserManager<PizzaStoreUser> UserManager
+@inject IdentityRedirectManager RedirectManager
+@inject ILogger<LoginWithRecoveryCode> Logger
+
+<PageTitle>恢复代码验证</PageTitle>
+
+<h1>恢复代码验证</h1>
+
+<StatusMessage Message="@message" />
+<p>
+    您请求使用恢复代码登录。在您提供身份验证器应用代码登录或禁用双因素认证并重新登录之前，此次登录不会被记住。
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <EditForm Model="Input" FormName="login-with-recovery-code" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <hr/>
+            <DataAnnotationsValidator/>
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="form-floating mb-3">
+                <label for="recovery-code" class="form-label">恢复代码</label>
+                <InputText @bind-Value="Input.RecoveryCode" class="form-control" autocomplete="off" placeholder="你的恢复代码"/>
+                <ValidationMessage For="() => Input.RecoveryCode" class="text-danger"/>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">登录</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private string? message;
+    private PizzaStoreUser user = default!;
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = new();
+
+    [SupplyParameterFromQuery]
+    private string? ReturnUrl { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // 确保用户已经通过用户名和密码验证页面
+        user = await SignInManager.GetTwoFactorAuthenticationUserAsync() ??
+            throw new InvalidOperationException("无法加载双因素认证用户。");
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+        var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
+
+        var result = await SignInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
+
+        var userId = await UserManager.GetUserIdAsync(user);
+
+        if (result.Succeeded)
+        {
+            Logger.LogInformation("ID 为 '{UserId}' 的用户使用恢复代码登录成功。", userId);
+            RedirectManager.RedirectTo(ReturnUrl);
+        }
+        else if (result.IsLockedOut)
+        {
+            Logger.LogWarning("用户账户已被锁定。");
+            RedirectManager.RedirectTo("Account/Lockout");
+        }
+        else
+        {
+            Logger.LogWarning("ID 为 '{UserId}' 的用户输入了无效的恢复代码。", userId);
+            message = "错误：输入的恢复代码无效。";
+        }
+    }
+
+    private sealed class InputModel
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "恢复代码")]
+        public string RecoveryCode { get; set; } = "";
+    }
+}

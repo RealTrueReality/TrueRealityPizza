@@ -1,0 +1,63 @@
+@implements IDisposable
+@inject NavigationManager Navigation
+
+<div class="user-info">
+    <AuthorizeView>
+        <Authorizing>
+            <text>...</text>
+        </Authorizing>
+        <Authorized>
+            <a href="Account/Manage" style="padding: 0;background: none" >
+                <img src="img/user.svg"/>
+                </a>
+            <div>
+
+                <a href="Account/Manage" style="padding: 0;" class="username">
+                    @if (context.User.IsInRole("Admin")) {
+                        <span>管理员</span>
+                    }
+                    else if (context.User.IsInRole("Customer")) {
+                        <span>顾客</span>
+                    }
+                    else {
+                        <span>未知</span>
+                    }
+                    &nbsp;
+                    @context.User.Identity.Name
+                </a>
+                <form action="Account/Logout" method="post">
+                    <AntiforgeryToken/>
+                    <input type="hidden" name="ReturnUrl" value="@currentUrl"/>
+                    <button class="btn btn-link sign-out" type="submit" style="font-size: 1rem">退出</button>
+                </form>
+
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <a class="sign-in" href="Account/Register">注册</a>
+            <a class="sign-in" href="Account/Login">登录</a>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
+@code {
+    private string? currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = Navigation.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
+    }
+
+}

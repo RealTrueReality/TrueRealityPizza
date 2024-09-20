@@ -1,0 +1,33 @@
+﻿@page "/Account/Manage/PersonalData"
+
+@inject IdentityUserAccessor UserAccessor
+
+<PageTitle>个人数据</PageTitle>
+
+<StatusMessage/>
+<h3>个人数据</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>您的账户包含您提供的个人数据。本页面允许您下载或删除这些数据。</p>
+        <p>
+            <strong>删除这些数据将永久移除您的账户，且无法恢复。</strong>
+        </p>
+        <form action="Account/Manage/DownloadPersonalData" method="post">
+            <AntiforgeryToken/>
+            <button class="btn btn-primary" type="submit">下载</button>
+            
+            <a href="Account/Manage/DeletePersonalData" class="btn btn-danger">删除</a>
+        </form>
+
+    </div>
+</div>
+
+@code {
+    [CascadingParameter] private HttpContext HttpContext { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync() {
+        _ = await UserAccessor.GetRequiredUserAsync(HttpContext);
+    }
+
+}

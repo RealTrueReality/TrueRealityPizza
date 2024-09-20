@@ -1,0 +1,57 @@
+﻿@page "/admin/pizza-management"
+@using TrueRealityPizza.Shared
+@using Microsoft.AspNetCore.Authorization
+@inject IRepository Repository
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+@rendermode InteractiveServer
+<PageTitle>管理披萨</PageTitle>
+@if (specials == null) {
+    <p>加载中...</p>
+}
+else {
+    <div class="main">
+        <ul class="pizza-cards">
+            @if (specials is not null) {
+                @foreach (var special in specials) {
+                    <li style="background-image: url('@special.ImageUrl')"
+                        @onclick="() => EditPizza(special.Id)">
+                        <div class="pizza-info">
+                            <span class="title">@special.Name</span>
+                            @special.Description
+                            <span class="price">@special.GetFormattedBasePrice()</span>
+                        </div>
+                    </li>
+                }
+
+                <li style="background-image: url('img/pizzas/plus.png'); 
+                background-size: contain; background-repeat: no-repeat; background-position: center;"
+                    @onclick="AddPizza">
+                    <div class="pizza-info">
+                        <span class="title">上架新披萨</span>
+                        点击这里上架新披萨>>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+@code {
+    List<PizzaSpecial>? specials;
+
+    protected override async Task OnInitializedAsync() {
+        specials = await Repository.GetSpecials();
+    }
+
+    // 导航到添加披萨页面
+    private void AddPizza() {
+        NavigationManager.NavigateTo("/add-or-edit-pizza");
+    }
+
+    // 导航到编辑披萨页面
+    private void EditPizza(int pizzaId) {
+        NavigationManager.NavigateTo($"/add-or-edit-pizza/{pizzaId}");
+    }
+
+}

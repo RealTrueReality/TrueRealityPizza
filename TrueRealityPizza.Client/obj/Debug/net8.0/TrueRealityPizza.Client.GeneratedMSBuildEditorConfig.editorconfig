@@ -1,0 +1,51 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = TrueRealityPizza.Client
+build_property.RootNamespace = TrueRealityPizza.Client
+build_property.ProjectDir = E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Client\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\RiderProjects\TrueRealityPizza\TrueRealityPizza.Client
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/Components/AddressEditor.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBZGRyZXNzRWRpdG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/Components/ConfiguredPizzaItem.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb25maWd1cmVkUGl6emFJdGVtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/Components/ConfigurePizzaDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xDb25maWd1cmVQaXp6YURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/Components/OrderReview.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xPcmRlclJldmlldy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/Components/Pages/Checkout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDaGVja291dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/RiderProjects/TrueRealityPizza/TrueRealityPizza.Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

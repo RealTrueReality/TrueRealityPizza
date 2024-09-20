@@ -1,0 +1,77 @@
+﻿@page "/Account/Manage"
+
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<PizzaStoreUser> UserManager
+@inject SignInManager<PizzaStoreUser> SignInManager
+@inject IdentityUserAccessor UserAccessor
+@inject IdentityRedirectManager RedirectManager
+
+<PageTitle>个人资料</PageTitle>
+
+<h3>个人资料</h3>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <StatusMessage />
+        <EditForm Model="Input" FormName="profile" OnValidSubmit="OnValidSubmitAsync" method="post">
+            <DataAnnotationsValidator/>
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="form-floating mb-3">
+                <label for="username" class="form-label">用户名</label>
+                <input type="text" value="@username" class="form-control" placeholder="请选择您的用户名。" disabled/>
+            </div>
+            <div class="form-floating mb-3">
+                <label for="phone-number" class="form-label">电话号码</label>
+                <InputText @bind-Value="Input.PhoneNumber" class="form-control" placeholder="请输入您的电话号码。"/>
+                <ValidationMessage For="() => Input.PhoneNumber" class="text-danger"/>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">保存</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private PizzaStoreUser user = default!;
+    private string? username;
+    private string? phoneNumber;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm]
+    private InputModel Input { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        username = await UserManager.GetUserNameAsync(user);
+        phoneNumber = await UserManager.GetPhoneNumberAsync(user);
+
+        Input.PhoneNumber ??= phoneNumber;
+    }
+
+    private async Task OnValidSubmitAsync()
+    {
+        if (Input.PhoneNumber != phoneNumber)
+        {
+            var setPhoneResult = await UserManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            if (!setPhoneResult.Succeeded)
+            {
+                RedirectManager.RedirectToCurrentPageWithStatus("错误: 设置电话号码失败。", HttpContext);
+            }
+        }
+
+        await SignInManager.RefreshSignInAsync(user);
+        RedirectManager.RedirectToCurrentPageWithStatus("您的个人资料已更新", HttpContext);
+    }
+
+    private sealed class InputModel
+    {
+        [Phone]
+        [Display(Name = "电话号码")]
+        public string? PhoneNumber { get; set; }
+    }
+}

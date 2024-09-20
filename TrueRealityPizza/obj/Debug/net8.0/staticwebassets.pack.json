@@ -1,0 +1,197 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\Components\\Account\\Pages\\Manage\\EnableAuthenticator.razor.js",
+      "PackagePath": "staticwebassets\\Components\\Account\\Pages\\Manage\\EnableAuthenticator.razor.js"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\TrueRealityPizza.bundle.scp.css",
+      "PackagePath": "staticwebassets\\TrueRealityPizza.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\BlazingPizza.lib.module.js",
+      "PackagePath": "staticwebassets\\BlazingPizza.lib.module.js"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-300.woff",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-300.woff"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-300.woff2",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-300.woff2"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-500.woff",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-500.woff"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-500.woff2",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-500.woff2"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-700.woff",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-700.woff"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-700.woff2",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-700.woff2"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-regular.woff",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-regular.woff"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand-v8-latin-regular.woff2",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand-v8-latin-regular.woff2"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\font\\quicksand.css",
+      "PackagePath": "staticwebassets\\css\\font\\quicksand.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\orange-with-gray.css",
+      "PackagePath": "staticwebassets\\css\\orange-with-gray.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\original.css",
+      "PackagePath": "staticwebassets\\css\\original.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\site-orange.css",
+      "PackagePath": "staticwebassets\\css\\site-orange.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\addpizza.png",
+      "PackagePath": "staticwebassets\\img\\addpizza.png"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\admin.svg",
+      "PackagePath": "staticwebassets\\img\\admin.svg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\bike.svg",
+      "PackagePath": "staticwebassets\\img\\bike.svg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\blazinglogo.png",
+      "PackagePath": "staticwebassets\\img\\blazinglogo.png"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\icon-512.png",
+      "PackagePath": "staticwebassets\\img\\icon-512.png"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\info.svg",
+      "PackagePath": "staticwebassets\\img\\info.svg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\logo.svg",
+      "PackagePath": "staticwebassets\\img\\logo.svg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\logotrans.png",
+      "PackagePath": "staticwebassets\\img\\logotrans.png"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizza-slice.svg",
+      "PackagePath": "staticwebassets\\img\\pizza-slice.svg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\bacon.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\bacon.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\brit.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\brit.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\cheese.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\cheese.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\idk.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\idk.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\margherita.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\margherita.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\meaty.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\meaty.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\mushroom.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\mushroom.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\pepperoni.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\pepperoni.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\plus.png",
+      "PackagePath": "staticwebassets\\img\\pizzas\\plus.png"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\pizzas\\salad.jpg",
+      "PackagePath": "staticwebassets\\img\\pizzas\\salad.jpg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\user.svg",
+      "PackagePath": "staticwebassets\\img\\user.svg"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\img\\头像png.png",
+      "PackagePath": "staticwebassets\\img\\头像png.png"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\manifest.json",
+      "PackagePath": "staticwebassets\\manifest.json"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\qrcode.min.js",
+      "PackagePath": "staticwebassets\\qrcode.min.js"
+    },
+    {
+      "Id": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\wwwroot\\service-worker.js",
+      "PackagePath": "staticwebassets\\service-worker.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TrueRealityPizza.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TrueRealityPizza.props",
+      "PackagePath": "build\\TrueRealityPizza.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TrueRealityPizza.props",
+      "PackagePath": "buildMultiTargeting\\TrueRealityPizza.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TrueRealityPizza.props",
+      "PackagePath": "buildTransitive\\TrueRealityPizza.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,327 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\TrueRealityPizza.csproj": {}
+  },
+  "projects": {
+    "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Client\\TrueRealityPizza.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Client\\TrueRealityPizza.Client.csproj",
+        "projectName": "TrueRealityPizza.Client",
+        "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Client\\TrueRealityPizza.Client.csproj",
+        "packagesPath": "C:\\Users\\d\\.nuget\\packages\\",
+        "outputPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\d\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj": {
+                "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj"
+              },
+              "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj": {
+                "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Authentication": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )",
+              "autoReferenced": true
+            },
+            "Microsoft.NET.Sdk.WebAssembly.Pack": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Runtime.Mono.browser-wasm",
+              "version": "[8.0.8, 8.0.8]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "browser-wasm": {
+          "#import": []
+        }
+      }
+    },
+    "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj",
+        "projectName": "TrueRealityPizza.ComponentsLibrary",
+        "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj",
+        "packagesPath": "C:\\Users\\d\\.nuget\\packages\\",
+        "outputPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\d\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.Web": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj",
+        "projectName": "TrueRealityPizza.Shared",
+        "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj",
+        "packagesPath": "C:\\Users\\d\\.nuget\\packages\\",
+        "outputPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\d\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj": {
+                "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\TrueRealityPizza.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\TrueRealityPizza.csproj",
+        "projectName": "TrueRealityPizza",
+        "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\TrueRealityPizza.csproj",
+        "packagesPath": "C:\\Users\\d\\.nuget\\packages\\",
+        "outputPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\d\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Client\\TrueRealityPizza.Client.csproj": {
+                "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Client\\TrueRealityPizza.Client.csproj"
+              },
+              "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj": {
+                "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.ComponentsLibrary\\TrueRealityPizza.ComponentsLibrary.csproj"
+              },
+              "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj": {
+                "projectPath": "E:\\RiderProjects\\TrueRealityPizza\\TrueRealityPizza.Shared\\TrueRealityPizza.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "WebPush": {
+              "target": "Package",
+              "version": "[1.0.12, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

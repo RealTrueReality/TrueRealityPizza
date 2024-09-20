@@ -1,0 +1,52 @@
+﻿@inherits LayoutComponentBase
+
+<div class="top-bar">
+	<a class="logo" style="padding: 0;" href="">
+		<img src="img/logotrans.png" />
+	</a>
+
+	<!-- 点单导航项，所有用户都能看到 -->
+	<NavLink href="" class="nav-tab" Match="NavLinkMatch.All">
+		<img src="img/pizza-slice.svg" />
+		<div>点单</div>
+	</NavLink>
+
+	<!-- 我的订单，只有经过身份验证的用户才能看到 -->
+	<AuthorizeView>
+		<Authorized>
+			<NavLink href="myorders" class="nav-tab">
+				<img src="img/bike.svg" />
+				<div>我的订单</div>
+			</NavLink>
+		</Authorized>
+	</AuthorizeView>
+
+	<!-- 管理员功能：管理披萨，只有管理员可以看到 -->
+	<AuthorizeView Roles="Admin">
+		<Authorized>
+			<NavLink href="admin/pizza-management" class="nav-tab">
+				<img src="img/admin.svg" />
+				<div>管理披萨</div>
+			</NavLink>
+		</Authorized>
+	</AuthorizeView>
+
+	<!-- 关于页面导航项，所有用户都能看到 -->
+	<NavLink href="about" class="nav-tab">
+		<img src="img/info.svg" />
+		<div>关于</div>
+	</NavLink>
+
+	<!-- 登录和用户显示 -->
+	<LoginDisplay />
+</div>
+
+<div class="content">
+	@Body
+</div>
+
+<div id="blazor-error-ui">
+	发生了未处理的错误。
+	<a href="" class="reload">重新加载</a>
+	<a class="dismiss">🗙</a>
+</div>

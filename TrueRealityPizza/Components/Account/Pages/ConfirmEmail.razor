@@ -1,0 +1,55 @@
+﻿@page "/Account/ConfirmEmail"
+
+@using System.Text
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.WebUtilities
+
+@inject UserManager<PizzaStoreUser> UserManager
+@inject IdentityRedirectManager RedirectManager
+
+<PageTitle>确认邮箱</PageTitle>
+
+<h1>确认邮箱</h1>
+<div class="row">
+    <div class="col-md-4">
+        <hr>
+        <StatusMessage Message="@statusMessage" />
+    </div>
+</div>
+
+<a class="btn btn-primary" href="Account/Login">返回登陆</a>
+
+@code {
+    private string? statusMessage;
+
+    [CascadingParameter]
+    private HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromQuery]
+    private string? UserId { get; set; }
+
+    [SupplyParameterFromQuery]
+    private string? Code { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (UserId is null || Code is null)
+        {
+            RedirectManager.RedirectTo("");
+        }
+
+        var user = await UserManager.FindByIdAsync(UserId);
+        if (user is null)
+        {
+            HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            statusMessage = $"加载用户ID {UserId} 时出错";
+        }
+        else
+        {
+            var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(Code));
+            var result = await UserManager.ConfirmEmailAsync(user, code);
+            statusMessage = result.Succeeded ? "感谢您确认您的邮箱。" : "确认邮箱时出错。";
+            
+        }
+    }
+}

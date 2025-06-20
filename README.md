@@ -1,3 +1,13 @@
+## 📸 应用截图
+
+| 首页 | 自定义披萨 |
+| :---: | :---: |
+| ![图片](https://github.com/user-attachments/assets/240350f2-59a0-45af-bd0c-8f4e30982e37)| ![图片](https://github.com/user-attachments/assets/12e75eb9-7999-4baa-93e9-26f22f486a3f)|
+| **地址填写** | **订单详情** |
+| ![图片](https://github.com/user-attachments/assets/d135d0ac-38bd-426f-b52e-f248ef6227a2)| ![图片](https://github.com/user-attachments/assets/45559d1f-21e2-4d03-aeeb-c93ce1adacb6)|
+
+
+
 # TrueRealityPizza 项目开发与运行环境说明文档
 
 ## 目录
